@@ -11,3 +11,19 @@ authors:
     email: ignacio.pardo@ort.edu.ar
     affiliation: Universidad Torcuato Di Tella
     orcid: 'https://orcid.org/0000-0001-8837-8099'
+references:
+  - name: The Research Software Project team
+  - authors:
+    - family-names: H. Cormen
+      given-names: Thomas
+    - family-names: E. Leiserson
+      given-names: Charles
+    - family-names: L. Rivest
+      given-names: Ronald
+    - family-names: Stein
+      given-names: Cliffod
+    type: generic
+keywords:
+  - Academic
+  - Algorithms and Data Structures
+license: MIT
