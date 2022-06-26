@@ -1,0 +1,13 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Resumen TDIII - Algoritmos y Estructuras de Datos
+message: Resumen TDIII - Algoritmos y Estructuras de Datos
+type: software
+authors:
+  - given-names: Ignacio
+    family-names: Pardo
+    email: ignacio.pardo@ort.edu.ar
+    affiliation: Universidad Torcuato Di Tella
+    orcid: 'https://orcid.org/0000-0001-8837-8099'
