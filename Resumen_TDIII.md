@@ -480,3 +480,274 @@ struct nodo {
 // - |altura(n.izquierdo) - altura(n.derecho)| <= 1
 };
 ```
+
+## Ejemplos
+
+## Estructura e Invariantes de Representación
+### Fecha
+```cpp
+class Fecha{ 
+	public:	
+		/*
+			Rep(f : Fecha) 	≡ 	0 <= f._anio &&
+								1 <= f._mes <= 12 &&
+								1 <= f._dia <= 31 ⇔ (f._mes == 1 || f._mes == 3 || f._mes == 5 || f._mes == 7 || f._mes == 8 || f._mes == 10 || f._mes == 12) || 
+								1 <= f._dia <= 30 ⇔ (f._mes == 4 || f._mes == 6 || f._mes == 9 || f._mes == 11 ) || 
+								1 <= f._dia <= 28 ⇔ (f._mes == 2 && !esBisiesto(f._anio) ||
+								1 <= f._dia <= 29 ⇔ (f._mes == 2 && esBisiesto(f._anio)
+									
+			esBisiesto(a : int) ≡ (a mod 4 == 0 && a mod 100 != 0) || a mod 400 == 0
+
+			Fecha(int dia, int mes, int anio); // Constructor 
+		*/
+		
+		Fecha(int dia, int mes, int anio){
+			*this._dia = dia;
+			*this._mes = mes;
+			*this._anio = anio;
+		}
+
+		
+		void avanzar_dia(){
+			
+			Pre: True
+			Post: 	*this.dia() = *this0.dia() + 1 ⇔ Rep(this) ||
+				*this.mes() = *this0.mes() + 1 ⇔ Rep(this) && *this.dia() = 1 ||
+				*this.anio() = *this0.anio() + 1 ⇔ Rep(this) && *this.dia() = 1 && *this.mes() = 1
+			
+			if (this->esFecha(*this._dia + 1, *this._mes, *this._anio))
+				*this._dia++;
+			else if (this->esFecha(*this._dia, *this._mes + 1, *this._anio)){
+				*this._mes++;
+				*this._dia = 1;
+			}
+			else{
+				*this._anio++;
+				*this._mes = 1;
+				*this._dia = 1;
+			}
+		}
+		
+		void avanzar_n_dias(int n){
+			for (int i = 0; i < n; i++){
+				*this.avanzar_dia();
+			}
+		}
+
+		int dia() {
+			return *this._dia; 
+		}
+
+		int mes() {
+			return *this._mes; 
+		}
+
+		int anio() {
+			return *this._anio; 
+		}
+
+		bool operator==(const Fecha& f) {
+			return (*this.dia() == f.dia() && *this.mes() == f.mes() && *this.anio() == f.anio());
+		}
+	
+	private:
+
+		bool esFecha(int d, int m, int a){
+			return 
+			(0 <= a &&
+			1 <= m && m <= 12 && (
+			(1 <= d && d <= 31 && (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12)) || 
+			(1 <= d && d <= 30 && (m == 4 || m == 6 || m == 9 || m == 11 )) || 
+			(1 <= d && d <= 28 && (m == 2 && !this->esBisiesto(a)) ||
+			(1 <= d && d <= 29 && (m == 2 && this->esBisiesto(a))))));
+		}
+
+		bool esBisiesto(int a){
+			return ((a  % 4 == 0 && a  % 100 != 0) || a % 400 == 0);
+		}
+		int _dia;
+		int _mes;
+		int _anio; 
+
+};
+```
+### Racional
+
+```cpp
+
+
+class Racional {
+	
+	Public:
+
+		esSimplificado(a, b :int) ≡ (∄ n, d, k: int) k > 1 && n * k = a && d * k = b
+		Rep(r : Racional) ≡ r._denominador != 0 
+		RepAlt(r : Racional) ≡ r._denominador > 0 && esSimplificado(r._numerador, r._denominador)
+
+		Racional(int numerador, int denominador); // Constructor
+		Pre: denominador != 0
+		Post: 	
+				*this.denominador() = |denominador|
+				*this.numerador() = numerador && (numerador * denominador >= 0) || 
+				*this.numerador() = |numerador| && 
+				esSimplificado(*this.numerador(), *this.denominador())
+
+		int numerador() const; // Observador
+
+		int denominador() const; // Observador
+
+		bool operator==(const Racional & R) // Otra operación
+		Pre: True
+		Post:True ⇔ (∃ k: int) 	*this.numerador() * k == R.numerador() && 
+								*this.denominador() * k == R.denominador() || 
+								*this.numerador() == R.numerador() * k && 
+								*this.denominador() == R.denominador() * k 
+
+		void sumar(const Racional & R); // Modificador
+		Pre: 	this0 = this
+		Post: 	*this.denominador() = *this0.denominador() * R.denominador() && 
+				*this.numerador() = this0.numerador() * R.denominador() + this0.denominador() * R.numerador() &&
+
+		Post: 	
+				*this.denominador() = *this0.denominador() * R.denominador() && 
+				*this.numerador() = this0.numerador() * R.denominador() + this0.denominador() * R.numerador() &&
+				esSimplificado(*this.numerador(), *this.denominador())
+		
+	Private:
+		int _numerador;
+		int _denominador;
+};
+```
+
+## Algoritmos
+
+### Selection Sort
+
+```cpp
+void selection_sort(vector<int> & v){
+	int count = 0;
+	while (count < v.size()){
+		int m = min_pos(v, count);
+		int t = v[count];
+		v[count] = v[m];
+		v[m] = t;
+		count++;
+	}
+}
+```
+
+### Merge Sort N
+
+```cpp
+vector<int> merge_mult(vector<vector<int>> in){
+	vector<int> vr;
+	vector<int> ind(in.size(), 0);
+
+	//Iteradores
+	for (int i = 0; i < in.size(); i++){
+		ind[i] = in[i].size();
+	}
+
+	vector<int> cands(in.size(), 0);
+
+	while (!all_ceros(ind)){
+		for (int i = 0; i < in.size(); i++){
+			cands[i] = (ind[i] != 0) ? in[i][in[i].size() - ind[i]] : INT_MAX;	
+		}
+		int l = minPos(cands);
+		int min = in[l][in[l].size() - ind[l]];
+		vr.push_back(min);
+		ind[l]--;
+
+		for (int i = 0; i < in.size(); i++){
+			cands[i] = 0;
+		}
+	}
+	
+    return vr;
+}
+```
+
+### Aplanar Abrbol
+
+```cpp
+// Reursivo
+list<int> aplanar(nodo *n){
+    if (n == nullptr)
+        return {}
+    return {aplanar(n->hijo_izq), n->valor, aplanar(n->hijo_der)} 
+}
+
+// Stack
+list<int> Arbol<int> :: aplanar() const{
+    list<int> lista_aplanada;
+    nodo *actual = raiz;
+    stack<nodo*> aux_list = {};
+    while(actual != nullptr || aux_list.empty() == false){
+        if(actual != nullptr){
+            aux_list.push(actual);
+            actual = actual->hijo_izq;
+        }
+        else{
+            actual = aux_list.top();
+            lista_aplanada.push_back((aux_list.top())->valor);
+            aux_list.pop();
+            actual = actual->hijo_der;
+        }
+    }
+    return lista_aplanada;
+}
+```
+
+### Triple Quicksort
+
+```cpp
+vector<int> triple_dividir(vector<int> & v, int d, int h){
+    vector<int> res; 
+    int pivot;
+
+    int p = v[h-1];
+    int i = d;
+    for(int j = d; j < h-1; j++){
+        if(v[j] <= p){
+            pivot = v[i];
+            v[i] = v[j];
+            v[j] = pivot;
+            i = i + 1;
+        }
+    }
+
+    res.push_back(i);
+    pivot = v[i];
+    v[i] = v[h-1];
+    v[h-1] = pivot;
+    
+    int q = v[h-1];
+    int l = i;
+    for(int y = i; y < h-1; y++){
+        if(v[y] <= q ){
+            pivot = v[l];
+            v[l] = v[y];
+            v[y] = pivot;
+            l = l + 1;
+        }
+    }
+
+    res.push_back(l);
+    pivot = v[l];
+    v[l] = v[h-1];
+    v[h-1] = pivot;
+
+    return res;
+}
+
+void triple_quicksort(vector<int> & v, int d, int h){
+    if(d < h - 1){
+        vector<int> pos = triple_dividir(v, d, h);
+        triple_quicksort(v,d,pos[0]);
+        triple_quicksort(v,pos[0]+1,pos[1]);
+        triple_quicksort(v,pos[1]+1,h);
+    }
+}
+```
+
