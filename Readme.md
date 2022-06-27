@@ -1,4 +1,4 @@
----
+<!-- 
 title: "Resumen Segundo Parcial TDIII - Algoritmos y Estructuras de Datos."
 author: 
   - name          : "Ignacio Pardo"
@@ -10,7 +10,7 @@ bibliography: "Cormen, T. H., Charles Eric Leiserson, Rivest, R. L., & Stein, C.
 fontfamily: Fira Code
 papersize: a4
 output: pdf
----
+-->
 
 # Resumen Segundo Parcial TDIII - Algoritmos y Estructuras de Datos.
 
@@ -22,11 +22,11 @@ output: pdf
 - [Resumen Segundo Parcial TDIII - Algoritmos y Estructuras de Datos.](#resumen-segundo-parcial-tdiii-algoritmos-y-estructuras-de-datos)
   - [Tabla de contenidos.](#tabla-de-contenidos)
   - [Complejidad algorítmica](#complejidad-algorítmica)
-    - [Big O Notation](#big-o-notation)
-    - [Big Ω Notation](#big-ω-notation)
-    - [Big Θ Notation](#big-θ-notation)
+    - [Big $O$ Notation](#big-o-notation)
+    - [Big $Ω$ Notation](#big-ω-notation)
+    - [Big $Θ$ Notation](#big-θ-notation)
     - [Ejemplo](#ejemplo)
-    - [Función de costo T(n) y Árbol de recursión](#función-de-costo-tn-y-árbol-de-recursión)
+    - [Función de costo $T(n)$ y Árbol de recursión](#función-de-costo-tn-y-árbol-de-recursión)
   - [Ordenamiento](#ordenamiento)
     - [Selection Sort](#selection-sort)
     - [Insertion Sort](#insertion-sort)
@@ -76,21 +76,21 @@ output: pdf
 
 ## Complejidad algorítmica
 
-### Big O Notation
+### Big $O$ Notation
 - Cota superior asintótica, “Worst case”.
-- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ$>=$0$ -> $ℝ$
+- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ_0$ -> $ℝ$
     
 $$O(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0 n_0 > 0 \ / \ 0 <= f (n) <= c · g(n) \ \ ∀ \ \ n >= n_0 \}$$
 
-### Big Ω Notation
+### Big $Ω$ Notation
 - Cota inferior asintótica, “Best case”.
-- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ$>=$0$ -> $ℝ$
+- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ_0$ -> $ℝ$
 
 $$Ω(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0 n_0 > 0 \ / \ 0 <=  c · g(n) <= f(n) \ \ ∀ \ \ n >= n_0 \}$$
 
-### Big Θ Notation
+### Big $Θ$ Notation
 - Cota ajustada asintótica, “Average Case”.
-- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ$>=$0$ -> $ℝ$
+- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ_0$ -> $ℝ$
     
 $$Θ(g(n)) = \{ f(n) \ | \ ∃ \ \ c_1, c_2 > 0 n_0 > 0 \ / \ 0 <= c_1 · g(n) <= f(n) <= c_2 · g(n) \ \ ∀ \ \ n >= n_0 \} = O(g(n)) ∩ Ω(g(n))$$
 
@@ -110,15 +110,14 @@ bool buscar(int elem, const vector<int> & v){
 ```
 1. Determinar cuál es la medida de tamaño de entrada para el algoritmo dado.
 - Tamaño de la entrada: $|v|$
-2. Determinar qué valores de entrada constituyen el peor caso del
-algoritmo.
+2. Determinar qué valores de entrada constituyen el peor caso del algoritmo.
 - Peor caso: elem no está en $v$.
-3. Derivar del código del algoritmo la función de costo T que toma el tamaño de entrada como parámetro y calcula el costo computacional para el peor caso.
+3. Derivar del código del algoritmo la función de costo $T$ que toma el tamaño de entrada como parámetro y calcula el costo computacional para el peor caso.
 - Mejor caso: elem es el primer elemento de $v$.
 
 4. Proponer una función $f$ que será el órden de complejidad y demostrar que, según corresponda, $T ∈ O(f)$, o $T ∈ Ω(f)$, o $T ∈ Θ(f)$
 
-### Función de costo T(n) y Árbol de recursión 
+### Función de costo $T(n)$ y Árbol de recursión 
 (ver Apunte.)
 
 ## Ordenamiento
@@ -899,4 +898,3 @@ void triple_quicksort(vector<int> & v, int d, int h){
     }
 }
 ```
-
