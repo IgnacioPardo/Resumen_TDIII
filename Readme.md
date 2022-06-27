@@ -145,7 +145,7 @@ Demostración por inducción
 - Queremos ver que T(n) ≤ k · (n log n), para algún k.
 - Caso base:
     - Con n = 0,
-T(0) ≤ k · (0 log 0). No sirve, log 0 no está denido.
+T(0) ≤ k · (0 log 0). No sirve, log 0 no está definido.
     - Con n = 1,
 T(1) ≤ k · (0 log 1)
 c ≤ k · 0, no se cumple.
