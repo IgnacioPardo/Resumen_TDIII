@@ -2,13 +2,16 @@
 
 ## Tabla de contenidos
 
-- [Complejidad algorítmica](#complejidad-algortmica)
+- [Complejidad algorítmica](#complejidad-algor%C3%ADtmica)
 - [Ordenamiento](#ordenamiento)
 - [Tipos Abstractos de Datos](#tipos-abstractos-de-datos)
-- [Memoria Dinámica en C++](#memoria-dinmica-en-c)
+- [Memoria Dinámica en C++](#memoria-dinámica-en-c)
 - [Iteradores](#iteradores)
 - [Pilas y Colas](#pilas-y-colas)
 - [Arbol Binario](#arbol-binario)
+- Ejemplos
+	- [Estructuras e Invariantes de Representacion](#estructura-e-invariantes-de-representación)
+	- [Algoritmos](#algoritmos)
 
 ## Complejidad algorítmica
 
