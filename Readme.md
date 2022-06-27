@@ -668,7 +668,7 @@ vector<int> merge_mult(vector<vector<int>> in){
 }
 ```
 
-### Abrbol
+### Arbol
 
 #### Aplanar
 
