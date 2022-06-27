@@ -733,7 +733,6 @@ bool Arbol::contiene(int elem){
 }
 
 //Recursivo
-
 void nodo_add(int e, nodo *c){
 	if (c == nullptr)
 		c = new (new nodo(elem));
