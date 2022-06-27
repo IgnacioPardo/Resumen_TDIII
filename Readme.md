@@ -80,19 +80,19 @@ output: pdf
 - Cota superior asintótica, “Worst case”.
 - Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ_0$ -> $ℝ$
     
-$$O(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0 n_0 > 0 \ / \ 0 <= f (n) <= c · g(n) \ \ ∀ \ \ n >= n_0 \}$$
+$$O(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0, \ \ n_0 > 0 \ / \ 0 <= f (n) <= c · g(n) \ \ ∀ \ \ n >= n_0 \}$$
 
 ### Big $Ω$ Notation
 - Cota inferior asintótica, “Best case”.
 - Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ_0$ -> $ℝ$
 
-$$Ω(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0 n_0 > 0 \ / \ 0 <=  c · g(n) <= f(n) \ \ ∀ \ \ n >= n_0 \}$$
+$$Ω(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0, \ \ n_0 > 0 \ / \ 0 <=  c · g(n) <= f(n) \ \ ∀ \ \ n >= n_0 \}$$
 
 ### Big $Θ$ Notation
 - Cota ajustada asintótica, “Average Case”.
 - Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ_0$ -> $ℝ$
     
-$$Θ(g(n)) = \{ f(n) \ | \ ∃ \ \ c_1, c_2 > 0 n_0 > 0 \ / \ 0 <= c_1 · g(n) <= f(n) <= c_2 · g(n) \ \ ∀ \ \ n >= n_0 \} = O(g(n)) ∩ Ω(g(n))$$
+$$Θ(g(n)) = \{ f(n) \ | \ ∃ \ \ c_1, c_2 > 0, \ \ n_0 > 0 \ / \ 0 <= c_1 · g(n) <= f(n) <= c_2 · g(n) \ \ ∀ \ \ n >= n_0 \} = O(g(n)) ∩ Ω(g(n))$$
 
 ### Ejemplo     
 ```cpp {.line-numbers} {.line-numbers}
