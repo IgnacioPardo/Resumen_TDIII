@@ -1,41 +1,101 @@
+---
+title: "Resumen Segundo Parcial TDIII - Algoritmos y Estructuras de Datos."
+author: 
+  - name          : "Ignacio Pardo"
+    afilliation   : "Universidad Torcuato Di Tella"
+    email : "ipardo@utdt.mail.edu"
+
+date: "27/6/2022"
+bibliography: "Cormen, T. H., Charles Eric Leiserson, Rivest, R. L., & Stein, C. (2022). Introduction to algorithms, Fourth Edition. MIT Press."
+fontfamily: Fira Code
+papersize: a4
+output: pdf
+---
+
 # Resumen Segundo Parcial TDIII - Algoritmos y Estructuras de Datos.
 
-## Tabla de contenidos
+## Tabla de contenidos.
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
-- [Complejidad algorítmica](#complejidad-algor%C3%ADtmica)
-- [Ordenamiento](#ordenamiento)
-- [Tipos Abstractos de Datos](#tipos-abstractos-de-datos)
-- [Memoria Dinámica en C++](#memoria-dinámica-en-c)
-- [Iteradores](#iteradores)
-- [Pilas y Colas](#pilas-y-colas)
-- [Arbol Binario](#arbol-binario)
-- Ejemplos
-	- [Estructuras e Invariantes de Representacion](#estructura-e-invariantes-de-representación)
-	- [Algoritmos](#algoritmos)
+<!-- code_chunk_output -->
+
+- [Resumen Segundo Parcial TDIII - Algoritmos y Estructuras de Datos.](#resumen-segundo-parcial-tdiii-algoritmos-y-estructuras-de-datos)
+  - [Tabla de contenidos.](#tabla-de-contenidos)
+  - [Complejidad algorítmica](#complejidad-algorítmica)
+    - [Big O Notation](#big-o-notation)
+    - [Big Ω Notation](#big-ω-notation)
+    - [Big Θ Notation](#big-θ-notation)
+    - [Ejemplo](#ejemplo)
+    - [Función de costo T(n) y Árbol de recursión](#función-de-costo-tn-y-árbol-de-recursión)
+  - [Ordenamiento](#ordenamiento)
+    - [Selection Sort](#selection-sort)
+    - [Insertion Sort](#insertion-sort)
+    - [Bubble Sort](#bubble-sort)
+    - [Quick Sort](#quick-sort)
+    - [Merge Sort](#merge-sort)
+    - [Counting Sort](#counting-sort)
+  - [Tipos Abstractos de Datos](#tipos-abstractos-de-datos)
+    - [Especificación:](#especificación)
+    - [Implementación:](#implementación)
+  - [Memoria Dinámica en C++](#memoria-dinámica-en-c)
+    - [Heap](#heap)
+    - [```T* operator new T```](#t-operator-new-t)
+    - [```T operator*(T*)```](#t-operatort)
+    - [```operator->```](#operator-)
+    - [```operator delete *T```](#operator-delete-t)
+    - [Destructor](#destructor)
+  - [Iteradores](#iteradores)
+    - [Operaciones del contenedor](#operaciones-del-contenedor)
+  - [Pilas y Colas](#pilas-y-colas)
+    - [Pila o Stack](#pila-o-stack)
+    - [Cola o Queue](#cola-o-queue)
+  - [Arbol Binario](#arbol-binario)
+    - [Arbol Binario Completo](#arbol-binario-completo)
+    - [Arbol Binario inorder](#arbol-binario-inorder)
+    - [Arbol Binario preorder](#arbol-binario-preorder)
+    - [Arbol binario: Max Heap](#arbol-binario-max-heap)
+      - [Arbol binario: Max Heap en vector](#arbol-binario-max-heap-en-vector)
+    - [Árbol Binario de Búsqueda](#árbol-binario-de-búsqueda)
+    - [AVL: ABB balanceado](#avl-abb-balanceado)
+  - [Ejemplos](#ejemplos)
+  - [Estructura e Invariantes de Representación](#estructura-e-invariantes-de-representación)
+    - [Fecha](#fecha)
+    - [Racional](#racional)
+  - [Algoritmos](#algoritmos)
+    - [Selection Sort](#selection-sort-1)
+    - [Merge Sort N](#merge-sort-n)
+    - [Arbol](#arbol)
+      - [Aplanar](#aplanar)
+      - [Agregar y Pertenece](#agregar-y-pertenece)
+    - [Triple Quicksort](#triple-quicksort)
+
+<!-- /code_chunk_output -->
+
+
+<!-- pagebreak -->
 
 ## Complejidad algorítmica
 
 ### Big O Notation
 - Cota superior asintótica, “Worst case”.
-- Def: Sean f y g funciones f y g: ℕ>=0 -> ℝ
+- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ$>=$0$ -> $ℝ$
     
-        O(g(n)) = {f(n) | ∃ c > 0 y n0 > 0 / 0 <= f (n) <= c · g(n) ∀ n >= n0}
+$$O(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0 n_0 > 0 \ / \ 0 <= f (n) <= c · g(n) \ \ ∀ \ \ n >= n_0 \}$$
 
 ### Big Ω Notation
 - Cota inferior asintótica, “Best case”.
-- Def: Sean f y g funciones f y g: ℕ >= 0 -> ℝ
-    
-        Ω(g(n)) = {f(n) | ∃ c > 0 y n0 > 0 / 0 <=  c · g(n) <= f(n) ∀ n >= n0}
+- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ$>=$0$ -> $ℝ$
+
+$$Ω(g(n)) = \{ f(n) \ | \ ∃ \ \ c > 0 n_0 > 0 \ / \ 0 <=  c · g(n) <= f(n) \ \ ∀ \ \ n >= n_0 \}$$
 
 ### Big Θ Notation
 - Cota ajustada asintótica, “Average Case”.
-- Def: Sean f y g funciones f y g: ℕ>=0 -> ℝ
+- Def: Sean $f$ y $g$ funciones $f$ y $g$: $ℕ$>=$0$ -> $ℝ$
     
-        Θ(g(n)) = {f(n) | ∃ c1, c2 > 0 y n0 > 0 / 0 <= c1 · g(n) <= f(n) <= c2 · g(n) ∀ n >= n0} = O(g(n)) ∩ Ω(g(n))
+$$Θ(g(n)) = \{ f(n) \ | \ ∃ \ \ c_1, c_2 > 0 n_0 > 0 \ / \ 0 <= c_1 · g(n) <= f(n) <= c_2 · g(n) \ \ ∀ \ \ n >= n_0 \} = O(g(n)) ∩ Ω(g(n))$$
 
-
-##### Ejemplo     
-```cpp
+### Ejemplo     
+```cpp {.line-numbers} {.line-numbers}
 bool buscar(int elem, const vector<int> & v){
 	int res = false;
 	int i = 0;
@@ -49,17 +109,16 @@ bool buscar(int elem, const vector<int> & v){
 }
 ```
 1. Determinar cuál es la medida de tamaño de entrada para el algoritmo dado.
-- Tamaño de la entrada: |v|
+- Tamaño de la entrada: $|v|$
 2. Determinar qué valores de entrada constituyen el peor caso del
 algoritmo.
-- Peor caso: elem no está en v.
+- Peor caso: elem no está en $v$.
 3. Derivar del código del algoritmo la función de costo T que toma el tamaño de entrada como parámetro y calcula el costo computacional para el peor caso.
-- Mejor caso: elem es el primer elemento de v.
+- Mejor caso: elem es el primer elemento de $v$.
 
-4. Proponer una función f que será el órden de complejidad y demostrar que, según corresponda, T ∈ O(f), o T ∈ Ω(f ), o
-T ∈ Θ(f
+4. Proponer una función $f$ que será el órden de complejidad y demostrar que, según corresponda, $T ∈ O(f)$, o $T ∈ Ω(f)$, o $T ∈ Θ(f)$
 
-#### Función de costo T(n) y Árbol de recursión 
+### Función de costo T(n) y Árbol de recursión 
 (ver Apunte.)
 
 ## Ordenamiento
@@ -70,6 +129,36 @@ Buscar el minimo de la ```lista[k:]``` e insertarlo al principio. Repetir con ``
 Segmentar lista en dos, tomar elemento de la segunda parte e insertarlo de forma ordenada en la primera parte.
 ### Bubble Sort
 Recorrer la lista swapeando pares de elementos si corresponde. Repetir n veces.
+
+### Quick Sort
+Elegir un elemento pivot y dividir el vector entre los menores y los mayores al pivot.
+Ordenar cada partición recursivamente
+
+```cpp {.line-numbers}
+void quicksort(vector<int> & v, int d, int h){
+    if(d < h - 1){
+        int pos = dividir(v, d, h);
+        quicksort(v,d,pos);
+        quicksort(v,pos+1,h);
+    }
+}
+
+int dividir(vector<int> & v, int d, int h){
+    int pivot = v[h-1];
+    int i = d;
+    for(int j = d; j < h - 1; j++){
+        if(v[j] <= pivot){
+            swapear(v, i, j);
+            i = i + 1;
+        }
+    }
+    swapear(v, i, h-1);
+    return i;
+}
+//La función swapear(v,i,j) toma v por referencia e intercambia los elementos de las posiciones i y j.
+```
+<!-- pagebreak -->
+
 ### Merge Sort
 **Divide & conquer**
 Dividir la lista en dos mitades, ordenar las mitades recursivamente, combinar ambas partes de forma ordenada.
@@ -77,7 +166,7 @@ Dividir la lista en dos mitades, ordenar las mitades recursivamente, combinar am
 - Si no, realizamos divide y partimos el arreglo en dos mitades iguales (a=2, b=2), luego ordenamos cada mitad por separado, 
 - Finalmente hacemos conquer al combinar los dos subarreglos ordenados.
 
-```cpp 
+```cpp {.line-numbers} 
 //Pseudo
 vector<int> MergeSort(vector<int> V)
     1. Si |V| ≤ 1:
@@ -130,9 +219,8 @@ vector<int> merge(const vector<int> & v1, const vector<int> & v2){
 ```
 El tamaño de entrada n es j − i.
 
-            { c               si n = 0, n = 1,
-    T(n) = 
-            { 2T(n/2) + cn    si n > 1
+$ T(n) = c               $ si n = 0, n = 1
+$T(n) = 2T(n/2) + cn    $ si n > 1 
 
 - Altura del árbol: log n + 1 niveles.
 - Suma en cada nivel: cn.
@@ -141,74 +229,48 @@ El tamaño de entrada n es j − i.
 
 Demostración por inducción
 
-            { c               si n = 0, n = 1,
-    T(n) = 
-            { 2T(n/2) + cn    si n > 1
+$ T(n) = c               $ si n = 0, n = 1
+$T(n) = 2T(n/2) + cn    $ si n > 1 
 
 - Queremos ver que T(n) ≤ k · (n log n), para algún k.
 - Caso base:
     - Con n = 0,
-T(0) ≤ k · (0 log 0). No sirve, log 0 no está definido.
+$T(0) ≤ k · (0 log 0)$. No sirve, log 0 no está definido.
     - Con n = 1,
-T(1) ≤ k · (0 log 1)
-c ≤ k · 0, no se cumple.
-    - Con n = 2,
-T(2) ≤ k · (2 log 2)
-2T(1) + 2c ≤ 2k
-2c + 2c ≤ 2k
-2c ≤ k
-    - Tomamos k = 2c y n0 = 2
+$T(1) ≤ k · (0 log 1)$
+$c ≤ k · 0$, no se cumple.
+    - Con $n = 2$,
+$T(2) ≤ k · (2 log 2)$
+$2T(1) + 2c ≤ 2k$
+$2c + 2c ≤ 2k$
+$2c ≤ k$
+    - Tomamos $k = 2c$ y $n_0 = 2$
 
-- Caso inductivo: queremos ver que T(n) ≤ k · (n log n)
-- Hipótesis inductiva: vale T(x) ≤ k · (x log x) para x < n.
-- Sabemos que T(n) = 2T(n/2) + cn
-- ≤ 2k(n/2) log(n/2) + cn, por hipótesis inductiva
-- = kn log(n/2) + cn
-- = kn log n − kn log 2 + cn
-- = kn log n − kn + cn, ya que log 2 = 1.
-- ≤ kn log n, siempre que k ≥ c.
-- Vale, ya que habíamos tomado k = 2c.
+- Caso inductivo: queremos ver que $T(n) ≤ k · (n log n)$
+- Hipótesis inductiva: vale $T(x) ≤ k · (x log x)$ para $x < n$
+- Sabemos que $T(n) = 2T(n/2) + cn
+- ≤ 2k(n/2) log(n/2) + cn$, por hipótesis inductiva
+- $= kn log(n/2) + cn$
+- $= kn log n − kn log 2 + cn$
+- $= kn log n − kn + cn, ya que log 2 = 1$
+- $≤ kn log n, siempre que k ≥ c$
+- Vale, ya que habíamos tomado $k = 2c$
 
 Los problemas de Divide & Conquer tienen la siguiente recurrencia:
 
-            { c                si n = 0, n = 1
-    T(n) = 
-            { aT(n/b) + f (n)   si n > 1
-    (a subproblemas de tamaño n/b, f (n): costo de conquer)
+$ T(n) = c                $ si n = 0, n = 1
+$T(n) = aT(n/b) + f(n)    $ si n > 1 
+
+(a subproblemas de tamaño n/b, f (n): costo de conquer)
 
 Algunas recurrencias comunes y sus órdenes de complejidad
     
-    aT(n/a) + O(n) = O(n loga n) (a=2 es mergesort)
-    2T(n/2) + O(1) = O(n) (recorrer arbol binario)
-    T(n/2) + O(1) = O(log n) (búsqueda binaria)
+$aT(n/a) + O(n) = O(n logn)$ (a=2 es mergesort)
+$2T(n/2) + O(1) = O(n)$ (recorrer arbol binario)
+$T(n/2) + O(1) = O(log n)$ (búsqueda binaria)
 
-### Quick Sort
-Elegir un elemento pivot y dividir el vector entre los menores y los mayores al pivot.
-Ordenar cada partición recursivamente
+<!-- pagebreak -->
 
-```cpp
-void quicksort(vector<int> & v, int d, int h){
-    if(d < h - 1){
-        int pos = dividir(v, d, h);
-        quicksort(v,d,pos);
-        quicksort(v,pos+1,h);
-    }
-}
-
-int dividir(vector<int> & v, int d, int h){
-    int pivot = v[h-1];
-    int i = d;
-    for(int j = d; j < h - 1; j++){
-        if(v[j] <= pivot){
-            swapear(v, i, j);
-            i = i + 1;
-        }
-    }
-    swapear(v, i, h-1);
-    return i;
-}
-//La función swapear(v,i,j) toma v por referencia e intercambia los elementos de las posiciones i y j.
-```
 ### Counting Sort
 
 Todos los elementos son menores a un valor ```k```
@@ -219,7 +281,7 @@ Recorremos el vector de entrada y llenamos los contadores de ```c```.
 Recorremos el vector ```c``` y construimos el vector de salida agregando ```i```
 la cantidad de veces que indica```c[i]```
 
-```cpp
+```cpp {.line-numbers}
 vector<int> counting_sort(const vector<int> & v, int k){
     vector<int> contadores(k+1); // O(k+1)
     vector<int> res; // O(1)
@@ -241,8 +303,10 @@ vector<int> counting_sort(const vector<int> & v, int k){
 } // T(n) es O(n)
 
 ```
-T(n, k) ∈ O(n + k)
-Si k es un valor constante, entonces T(n, k) ∈ O(n)
+$T(n, k) ∈ O(n + k)$
+Si k es un valor constante, entonces $T(n, k) ∈ O(n)$
+
+<!-- pagebreak -->
 
 ## Tipos Abstractos de Datos
 
@@ -268,20 +332,18 @@ Para implementar el mismo tipo abstracto, podríamos elegir diferentes estructur
 
 El invariante *Rep(c : C)* es un predicado lógico que toma una instancia del tipo C y puede predicar sobre el contenido de la parte privada de C.
 
-
 **Algoritmos**: implementan las operaciones que describe la interfaz, operando sobre la estructura de representación respetando y manteniendo su coherencia interna.
 
 Una vez definida una interfaz y elegida una estructura, estamos en condiciones de escribir los algoritmos que implementarán la interfaz definida, operando sobre la estructura de manera adecuada.
 Nuestro código será responsable de mantener el Rep de la estructura de representación.
 El código puede aprovechar las restricciones del Rep para cuestiones de, por ejemplo, eficiencia.
 
-
-Vamos a describir un tipo abstracto con cuatro tipos de operaciones:
 - **Observadores**: devuelven toda la información que caracteriza a una instancia, sin modificarla; deberían ser un conjunto minimal
 - **Constructores**: crean nuevas instancias del tipo abstracto
 - **Modificadores**: modifican la instancia, pueden devolver información.
 - **Otras operaciones**: otros observadores no esenciales.
 
+<!-- pagebreak -->
 
 ## Memoria Dinámica en C++
 
@@ -363,6 +425,7 @@ Una Cola es similar a una Pila pero representa a una lista de espera a procesar 
     desencolar: quita de la cola y devuelve el próximo elemento a ser procesado en O(1)
 En C++: std::queue implementa cola usando std::deque como estructura de representación.
 
+<!-- pagebreak -->
 ## Arbol Binario
 Un árbol binario es una estructura de nodos conectados en la que
 - Cada nodo está conectado con a lo sumo dos nodos hijos,
@@ -371,7 +434,7 @@ Un árbol binario es una estructura de nodos conectados en la que
 
 Lo podemos representar con la siguiente estructura:
 
-```cpp
+```cpp {.line-numbers}
 struct nodo {
     int elem;
     nodo* izquierdo = nullptr;
@@ -431,7 +494,7 @@ Notar que:
 - Los hijos del nodo ```v[i]``` están en ```v[2i + 1]``` y ```v[2i + 2]```.
 - El padre del nodo ```v[i]``` está en ```v[(i - 1)/2]```.
 
-```cpp
+```cpp {.line-numbers}
 vector<int> _heap;
 // Rep: - _heap[i] >= _heap[2*i+1] and _heap[i] >= _heap[2*i+2]
 // para todo 0 <= i < (_heap.size()-1)/2}
@@ -449,7 +512,7 @@ int hijo_der(int pos) {
 
 ### Árbol Binario de Búsqueda
 
-```cpp
+```cpp {.line-numbers}
 struct nodo {
     int elem;
     nodo* izquierdo = nullptr;
@@ -467,7 +530,7 @@ nodo* _raiz;
 ```
 ### AVL: ABB balanceado
 
-```cpp
+```cpp {.line-numbers}
 struct nodo {
     int elem;
     nodo* izquierdo = nullptr;
@@ -484,24 +547,26 @@ struct nodo {
 };
 ```
 
+<!-- pagebreak -->
+
 ## Ejemplos
 
 ## Estructura e Invariantes de Representación
 ### Fecha
-```cpp
+```cpp {.line-numbers}
 class Fecha{ 
 	public:	
 		/*
-			Rep(f : Fecha) 	≡ 	0 <= f._anio &&
-								1 <= f._mes <= 12 &&
-								1 <= f._dia <= 31 ⇔ (f._mes == 1 || f._mes == 3 || f._mes == 5 || f._mes == 7 || f._mes == 8 || f._mes == 10 || f._mes == 12) || 
-								1 <= f._dia <= 30 ⇔ (f._mes == 4 || f._mes == 6 || f._mes == 9 || f._mes == 11 ) || 
-								1 <= f._dia <= 28 ⇔ (f._mes == 2 && !esBisiesto(f._anio) ||
-								1 <= f._dia <= 29 ⇔ (f._mes == 2 && esBisiesto(f._anio)
+        Rep(f : Fecha) 	≡ 	0 <= f._anio &&
+            1 <= f._mes <= 12 &&
+            1 <= f._dia <= 31 ⇔ (f._mes == 1 || f._mes == 3 || f._mes == 5 || f._mes == 7 || f._mes == 8 || f._mes == 10 || f._mes == 12) || 
+            1 <= f._dia <= 30 ⇔ (f._mes == 4 || f._mes == 6 || f._mes == 9 || f._mes == 11 ) || 
+            1 <= f._dia <= 28 ⇔ (f._mes == 2 && !esBisiesto(f._anio) ||
+            1 <= f._dia <= 29 ⇔ (f._mes == 2 && esBisiesto(f._anio)
 									
-			esBisiesto(a : int) ≡ (a mod 4 == 0 && a mod 100 != 0) || a mod 400 == 0
+        esBisiesto(a : int) ≡ (a mod 4 == 0 && a mod 100 != 0) || a mod 400 == 0
 
-			Fecha(int dia, int mes, int anio); // Constructor 
+        Fecha(int dia, int mes, int anio); // Constructor 
 		*/
 		
 		Fecha(int dia, int mes, int anio){
@@ -574,10 +639,11 @@ class Fecha{
 
 };
 ```
+<!-- pagebreak -->
+
 ### Racional
 
-```cpp
-
+```cpp {.line-numbers}
 
 class Racional {
 	
@@ -622,11 +688,13 @@ class Racional {
 };
 ```
 
+<!-- pagebreak -->
+
 ## Algoritmos
 
 ### Selection Sort
 
-```cpp
+```cpp {.line-numbers}
 void selection_sort(vector<int> & v){
 	int count = 0;
 	while (count < v.size()){
@@ -641,7 +709,7 @@ void selection_sort(vector<int> & v){
 
 ### Merge Sort N
 
-```cpp
+```cpp {.line-numbers}
 vector<int> merge_mult(vector<vector<int>> in){
 	vector<int> vr;
 	vector<int> ind(in.size(), 0);
@@ -671,11 +739,13 @@ vector<int> merge_mult(vector<vector<int>> in){
 }
 ```
 
+<!-- pagebreak -->
+
 ### Arbol
 
 #### Aplanar
 
-```cpp
+```cpp {.line-numbers}
 // Reursivo
 list<int> aplanar(nodo *n){
     if (n == nullptr)
@@ -706,7 +776,7 @@ list<int> Arbol<int> :: aplanar() const{
 
 #### Agregar y Pertenece
 
-```cpp
+```cpp {.line-numbers}
 
 //Recursivo
 bool nodo_contains(int e, nodo *c){
@@ -776,9 +846,11 @@ void Arbol::agregar(int elem){
 }
 ```
 
+<!-- pagebreak -->
+
 ### Triple Quicksort
 
-```cpp
+```cpp {.line-numbers}
 vector<int> triple_dividir(vector<int> & v, int d, int h){
     vector<int> res; 
     int pivot;
