@@ -668,7 +668,9 @@ vector<int> merge_mult(vector<vector<int>> in){
 }
 ```
 
-### Aplanar Abrbol
+### Abrbol
+
+#### Aplanar
 
 ```cpp
 // Reursivo
@@ -696,6 +698,79 @@ list<int> Arbol<int> :: aplanar() const{
         }
     }
     return lista_aplanada;
+}
+```
+
+#### Agregar y Pertenece
+
+```cpp
+
+//Recursivo
+bool nodo_contains(int e, nodo *c){
+    if (c == nullptr)
+        return false;
+    else if (c->valor == e)
+        return true; 
+    else if (c->valor > e && c->hijo_izq != nullptr)
+        return nodo_contains(e, c->hijo_izq);
+    else if (c->valor < e && c->hijo_der != nullptr)
+        return nodo_contains(e, c->hijo_der);
+    return false;
+}
+
+//Secuencial
+bool Arbol::contiene(int elem){
+	nodo *r = this->raiz;
+	while (r != nullptr){
+		if (r->valor == elem)
+			return true;
+		else if (r->valor > elem)
+			r = r->hijo_izq;
+		else
+			r = r->hijo_der;
+	}
+	return false;
+}
+
+//Recursivo
+
+void nodo_add(int e, nodo *c){
+	if (c == nullptr)
+		c = new (new nodo(elem));
+	else if (!nodo_contains(e, c)){
+		if (c->valor > elem)
+			nodo_add(elem, c->hijo_izq)
+		else
+			nodo_add(elem, c->hijo_der)
+	}
+}
+
+//Secuencial
+void Arbol::agregar(int elem){
+    nodo *n = (new nodo(elem));
+    if (this->raiz == nullptr){
+        this->raiz = n;
+    }
+    else if (!this->esta(elem)){
+        nodo *r = this->raiz;
+        while (r != nullptr){
+            if (r->valor > elem){
+                if (r->hijo_izq == nullptr){
+                    r->hijo_izq = n;
+                    break;
+                }
+                r = r->hijo_izq;
+            }
+            else if (r->valor < elem)
+            {   
+                if (r->hijo_der == nullptr){
+                    r->hijo_der = n;
+                    break;
+                }
+                r = r->hijo_der;
+            }
+        }
+    }
 }
 ```
 
