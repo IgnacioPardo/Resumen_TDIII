@@ -118,7 +118,8 @@ bool buscar(int elem, const vector<int> & v){
 4. Proponer una función $f$ que será el órden de complejidad y demostrar que, según corresponda, $T ∈ O(f)$, o $T ∈ Ω(f)$, o $T ∈ Θ(f)$
 
 ### Función de costo $T(n)$ y Árbol de recursión 
-(ver Apunte.)
+(ver Apunte.)[]
+@import "apunte-costo-arbol.pdf"
 
 ## Ordenamiento
 
@@ -747,9 +748,34 @@ vector<int> merge_mult(vector<vector<int>> in){
 ```cpp {.line-numbers}
 // Reursivo
 list<int> aplanar(nodo *n){
-    if (n == nullptr)
-        return {}
-    return {aplanar(n->hijo_izq), n->valor, aplanar(n->hijo_der)} 
+    nodo* c = n;
+    if (c->hijo_izq == nullptr && c->hijo_der == nullptr){
+        return {c->valor};
+    }
+
+    list<int> vr;
+    list<int> left = {};
+    list<int> right = {};
+    
+    if (c->hijo_izq != nullptr){
+        left = aplanar(c->hijo_izq);
+    }
+    if (c->hijo_der != nullptr){
+        right = aplanar(c->hijo_der);
+    }
+    
+    for (int v: left){
+        vr.push_back(v);
+    }
+    
+    vr.push_back(c->valor);
+    
+    for (int v: right){
+        vr.push_back(v);
+    }
+
+    return vr;
+}
 }
 
 // Stack
