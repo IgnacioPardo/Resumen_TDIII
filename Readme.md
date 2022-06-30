@@ -446,7 +446,7 @@ Una Pila representa a un conjunto de pendientes a procesar en orden inverso al d
     apilar: agrega un elemento al tope de la pila en O(1)
     desapilar: quita y devuelve el tope de la pila en O(1)
 
-En C++: std::stack implementa pila usando std::deque como estructura de representación.
+En C++: `std::stack` implementa pila usando `std::deque` como estructura de representación.
 
 ### Cola o Queue
 
@@ -454,7 +454,7 @@ Una Cola es similar a una Pila pero representa a una lista de espera a procesar 
 
     encolar: agrega un elemento al final de la cola en O(1)
     desencolar: quita de la cola y devuelve el próximo elemento a ser procesado en O(1)
-En C++: std::queue implementa cola usando std::deque como estructura de representación.
+En C++: `std::queue` implementa cola usando `std::deque` como estructura de representación.
 
 <!-- pagebreak -->
 ## Arbol Binario
