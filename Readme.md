@@ -429,8 +429,11 @@ elemento
 entrada/salida)
 - ```operator++```: avanza al siguiente (it. unidireccional)
 - ```operator--```: retrocede al anterior (it. bidireccional)
+
 En general, todas esas operaciones son O(1) o O(1) amortizado.
+
 Algunos contenedores además proveen la siguiente operación:
+
 - ```operator+ / operator-```: avanza/retrocede N lugares en O(1)
 (it. de acceso aleatorio)
 
