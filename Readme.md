@@ -12,6 +12,9 @@ papersize: a4
 output: pdf
 -->
 
+# Slides Primer Parcial TDIII - Algoritmos y Estructuras de Datos 
+[Link al compilado de slides](https://docs.google.com/document/d/1hDGvTrcwcycPMI2MuG_c5fLs2VkJCpJV1x2G_mpFHow)
+
 # Resumen Segundo Parcial TDIII - Algoritmos y Estructuras de Datos
 
 ## Tabla de contenidos
